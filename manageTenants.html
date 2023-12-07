@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Tenants</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/minty/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='custom.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Manage Tenants</h1>
+
+        <!-- Tenant Management Form -->
+        <form method="POST" enctype="multipart/form-data" class="mb-4">
+            <!-- Input field for tenant's name -->
+            <div class="form-group">
+                <label for="tenantName">Tenant Name:</label>
+                <input type="text" class="form-control" name="tenant_name" id="tenantName">
+            </div>
+
+            <!-- Input field for tenant's apartment number -->
+            <div class="form-group">
+                <label for="tenantApartment">Apartment Number:</label>
+                <input type="text" class="form-control" name="tenant_apartment" id="tenantApartment">
+            </div>
+            <button type="submit" class="btn btn-darker-minty">Add Tenant</button>
+        </form>
+
+        <!-- Section to display a list of tenants -->
+        <h2 class="mt-4">Tenant List</h2>
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Tenant ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Apartment Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through each tenant and display their information -->
+                {% for tenant_id, tenant in tenants.items() %}
+                <tr>
+                    <td>{{ tenant_id }}</td>
+                    <td>{{ tenant.name }}</td>
+                    <td>{{ tenant.apartment_number }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/" class="btn btn-primary">Back to Home</a>
+    </div>
+</body>
+</html>

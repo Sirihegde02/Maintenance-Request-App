@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Maintenance Request</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/minty/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='custom.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Submit Maintenance Request</h1>
+
+        <!-- Form for submitting a maintenance request -->
+        <form method="POST" enctype="multipart/form-data" class="mb-4">
+            <!-- Input field for apartment number -->
+            <div class="form-group">
+                <label for="apartmentNumber">Apartment Number:</label>
+                <input type="text" class="form-control" name="apartment_number" id="apartmentNumber" required>
+            </div>
+
+            <!-- Dropdown for selecting the problem area -->
+            <div class="form-group">
+                <label for="area">Problem Area:</label>
+                <select class="form-control" name="area">
+                    <option value="">Select an area</option>
+                    <option value="kitchen">Kitchen</option>
+                    <option value="bathroom">Bathroom</option>
+                    <option value="living room">Living Room</option>
+                    <option value="bedroom">Bedroom</option>
+                </select>
+            </div>
+
+            <!-- Textarea for description of the problem -->
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" name="description" required></textarea>
+            </div>
+
+            <!-- File input for optional photo upload -->
+            <div class="form-group">
+                <label for="photo">Photo (optional):</label>
+                <input type="file" class="form-control" name="photo">
+            </div>
+
+            <!-- Button to submit the form -->
+            <button type="submit" class="btn btn-darker-minty">Submit Request</button>
+        </form>
+        <a href="/" class="btn btn-primary">Back to Home</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Maintenance Requests</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/minty/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='custom.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Maintenance Requests</h1>
+
+        <!-- Filter Form -->
+        <form method="POST">
+            <!-- Input field for filtering by apartment number -->
+            <div class="form-group">
+                <label for="apartmentNumber">Apartment Number:</label>
+                <input type="text" class="form-control" id="apartmentNumber" name="apartment_number">
+            </div>
+
+            <!-- Dropdown for filtering by area -->
+            <div class="form-group">
+                <label for="area">Area:</label>
+                <select class="form-control" id="area" name="area">
+                    <option value="">Select Area</option>
+                    <option value="kitchen">Kitchen</option>
+                    <option value="bathroom">Bathroom</option>
+                    <option value="livingRoom">Living Room</option>
+                    <option value="bedroom">Bedroom</option>
+                </select>
+            </div>
+
+            <!-- Dropdown for filtering by status -->
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select class="form-control" id="status" name="status">
+                    <option value="">Select Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-darker-minty">Filter</button>
+        </form>
+
+        <!-- Requests Table -->
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Request ID</th>
+                    <th scope="col">Apartment Number</th>
+                    <th scope="col">Area</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through each maintenance request and display its details -->
+                {% for request_id, request in requests.items() %}
+                <tr>
+                    <td>{{ request_id }}</td>
+                    <td>{{ request.apartment_number }}</td>
+                    <td>{{ request.area }}</td>
+                    <td>{{ request.description }}</td>
+                    <td>{{ request.status }}</td>
+                    <td>
+                        <!-- Form to update the status of a request -->
+                        <!-- When submitted, it sends a POST request to update the request's status -->
+                        <form action="{{ url_for('update_status', request_id=request_id) }}" method="POST">
+                            <input type="hidden" name="new_status" value="completed">
+                            <button type="submit" class="btn btn-success">Mark as Completed</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/" class="btn btn-primary">Back to Home</a>
+    </div>
+</body>
+</html>

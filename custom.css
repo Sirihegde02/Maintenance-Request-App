@@ -1,0 +1,16 @@
+body {
+    background-color: #d1f2eb; /* Example: A lighter shade of minty */
+}
+h1, h2, h3, p, a, label, th, td {
+    color: #094563; /* Or any other dark color */
+}
+.btn-darker-minty {
+    background-color: #2a9d8f; /* Darker minty color */
+    border-color: #2a9d8f;
+    color: white; /* Adjust text color as needed */
+}
+
+.btn-darker-minty:hover {
+    background-color: #24897f; /* Slightly darker for hover effect */
+    border-color: #24897f;
+}
